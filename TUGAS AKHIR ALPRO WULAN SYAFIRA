@@ -1,0 +1,149 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void pembuka()
+{
+    int pilih;
+    printf("	===========================================	\n");
+    printf("	==================BANK WLN=================	\n");
+    printf("	===========================================	\n\n\n");
+}
+
+int main()
+{
+    int saldo = 1000000, pin, rekening, keluar, transfer, rekeningTuju, setor, nominal, pilih;
+    system("cls");
+    pembuka();
+    printf("\n");
+pin:
+    printf("MASUKAN PIN : ");
+    scanf("%d", &pin);
+    if (pin == 2022)
+    {
+    menu:
+        system("cls");
+        printf("TRANSAKSI :\n");
+        printf("  1. Tarik Tunai\n");
+        printf("  2. Transfer\n");
+        printf("  3. Cek Saldo\n");
+        printf("PILIH : ");
+        scanf("%d", &pilih);
+        switch (pilih)
+        {
+        case 1:
+            system("cls");
+        case1:
+            printf("NOMINAL YANG INGIN ANDA AMBIL :\n");
+            printf("  1. 100000\n");
+            printf("  2. 200000\n");
+            printf("  3. 300000\n");
+            printf("  4. Nominal Lain\n");
+            printf("PILIH : ");
+            scanf("%d", &nominal);
+            if (nominal == 1)
+                keluar = 100000;
+            else if (nominal == 2)
+                keluar = 200000;
+            else if (nominal == 3)
+                keluar = 300000;
+            else if (nominal == 4)
+            {
+                system("cls");
+            inputKeluar:
+                printf("NOMINAL YANG INGIN ANDA AMBIL : \n");
+                scanf("%d", &keluar);
+                if (keluar % 100000 != 0)
+                {
+                    system("cls");
+                    printf("NOMINAL BUKAN KELIPATAN 100000\n\n");
+                    goto inputKeluar;
+                }
+            }
+            else
+            {
+                system("cls");
+                printf("PILIHAN SALAH\nSILAHKAN PILIH KEMBALI\n\n");
+                goto case1;
+            }
+            if (keluar > saldo)
+            {
+                system("cls");
+                printf("TRANSAKSI GAGAL\n");
+                printf("SALDO TIDAK MENCUKUPI\n\n");
+                goto konfirmasi;
+            }
+            else
+            {
+                system("cls");
+                printf("TRANSAKSI BERHASIL!\n");
+                saldo = saldo - keluar;
+                printf("SISA SALDO ANDA : \n%d\n\n", saldo);
+                goto konfirmasi;
+            }
+            break;
+        case 2: 
+            system("cls");
+            printf("MASUKAN NOMOR REKENING YANG DITUJU :\n");
+            scanf("%d", &rekeningTuju);
+            printf("MASUKAN NOMINAL YANG INGIN DITRASFER\n");
+            scanf("%d", &transfer);
+            if (transfer > saldo)
+            {
+                system("cls");
+                printf("TRANSAKSI GAGAL\n");
+                printf("SALDO TIDAK MENCUKUPI\n\n");
+                goto konfirmasi;
+            }
+            else
+            {
+                system("cls");
+                printf("TRANSAKSI BERHASIL!\n");
+                saldo = saldo - transfer;
+                printf("SISA SALDO ANDA :\n%d\n\n", saldo);
+                goto konfirmasi;
+            }
+            break;
+        
+        case 3:
+            system("cls");
+            printf("SALDO ANDA ADALAH :\n%d\n\n", saldo);
+            goto konfirmasi;
+            break;
+        
+        default:
+            system("cls");
+            printf("PILIHAN TRANSAKSI SALAH\nSILAHKAN PILIH KEMBALI\n\n");
+            goto menu;
+        }
+    }
+    else
+    {
+        system("cls");
+        printf("MAAF PIN YANG ANDA MASUKAN SALAH\n\n");
+        goto pin;
+    }
+konfirmasi:
+    printf("Apakah anda ingin melakukan transaksi lain ?\n");
+    printf("  1. Ya\n");
+    printf("  2. Tidak\n");
+    printf("Pilih : ");
+    scanf("%d", &pilih);
+    if (pilih == 1)
+        goto menu;
+    else if (pilih == 2)
+        goto end;
+    else
+    {
+        system("cls");
+        printf("Pilihan Salah\nSilahkan pilih kembali\n\n");
+        goto konfirmasi;
+    }
+end:
+    system("cls");
+    printf("	===================Terimakasih===================\n");
+    
+    return 0;
+}
+
+//NAMA : WULAN SYAFIRA
+//NIM : 12250524117
